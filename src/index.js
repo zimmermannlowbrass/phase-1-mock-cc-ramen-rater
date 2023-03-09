@@ -2,6 +2,8 @@
 const menu = document.querySelector('#ramen-menu')
 const details = document.querySelector('#ramen-detail')
 const newRamenForm = document.querySelector('#new-ramen')
+const editRamen = document.querySelector('#edit-ramen')
+
 let detailImage = document.querySelector('.detail-image')
 let detailName = document.querySelector('.name')
 let detailRestaurant = document.querySelector('.restaurant')
@@ -13,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     newRamenForm.addEventListener('submit', (e) => {
         e.preventDefault()
         grabNewRamenInfo(e)
+    })
+    editRamen.addEventListener('submit', (e) => {
+        e.preventDefault()
+        changeTheRamen(e)
     })
 })
 
@@ -30,6 +36,9 @@ function populateRamen(ramen) {
     image.alt = ramen.name
     image.addEventListener('click', () => {showDetails(ramen)})
     menu.append(image)
+    if (ramen.id === 1) {
+        showDetails(ramen)
+    }
 }
 
 function showDetails(ramen) {
@@ -48,4 +57,10 @@ function grabNewRamenInfo(e) {
     let newComment = e.target[4].value
     let newRamen = {name: newName, image: newImage, restaurant: newRest, rating: newRating, comment: newComment}
     populateRamen(newRamen)
+}
+
+function changeTheRamen(e) {
+    detailRating.innerText = editRamen.querySelector('#new-rating').value
+    detailComment.innerText = editRamen.querySelector('#new-comment').value
+
 }
